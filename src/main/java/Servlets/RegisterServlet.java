@@ -1,7 +1,7 @@
 package Servlets;
 
-import User.User;
-import DAO.UserDao;
+import Models.User;
+import DAO.UserDAO;
 import MailSender.MailSender;
 
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet("/register")
 
 public class RegisterServlet extends HttpServlet {
-    private UserDao dao;
+    private UserDAO dao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        dao = (UserDao) getServletContext().getAttribute("UserDao");
+        dao = (UserDAO) getServletContext().getAttribute("UserDao");
 
         String username = req.getParameter("username");
         String password = req.getParameter("pwd");

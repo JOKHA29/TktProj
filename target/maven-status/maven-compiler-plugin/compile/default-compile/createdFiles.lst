@@ -3,6 +3,7 @@ MailSender\MailSender.class
 Info\Info.class
 Listeners\ContextListener.class
 Servlets\RegisterServlet.class
+User\Admin.class
 Servlets\LoginServlet.class
 Servlets\Logout.class
 Listeners\SessionListener.class

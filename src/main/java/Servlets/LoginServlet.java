@@ -7,14 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import User.User;
-import DAO.UserDao;
+import DAO.UserDAO;
 
 import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private UserDao dao;
+    private UserDAO dao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,14 +25,16 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        dao = (UserDao) getServletContext().getAttribute("UserDao");
+        dao = (UserDAO) getServletContext().getAttribute("UserDao");
         String username = req.getParameter("username");
         String password = req.getParameter("pwd");
         int userID = dao.CheckUser(username,password);
         if(userID != -1){
             req.getSession().setAttribute("id",userID);
             req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
+
         }
+
         else if(dao.CheckUsername(username)) req.getRequestDispatcher("WEB-INF/wrongPassword.jsp").forward(req, resp);
         else req.getRequestDispatcher("WEB-INF/wrongusername.jsp").forward(req, resp);
     }

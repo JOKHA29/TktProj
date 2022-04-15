@@ -1,16 +1,16 @@
 package DAO;
 
-import User.User;
+import Models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDao {
+public class UserDAO {
     private Connection con;
 
-    public UserDao(Connection con) {
+    public UserDAO(Connection con) {
         this.con = con;
     }
     public void adduser(User user){
@@ -57,5 +57,5 @@ public class UserDao {
         }
         return false;
     }
+    }
 
-}
