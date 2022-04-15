@@ -1,6 +1,6 @@
 package Listeners;
 
-import DAO.UserDao;
+import DAO.UserDAO;
 import Info.Info;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -22,7 +22,7 @@ public class ContextListener implements ServletContextListener {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        UserDao dao = new UserDao(con);
+        UserDAO dao = new UserDAO(con);
         servletContextEvent.getServletContext().setAttribute("UserDao",dao);
         System.out.println(servletContextEvent.getServletContext().getAttribute("UserDao"));
 
