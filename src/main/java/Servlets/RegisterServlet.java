@@ -33,7 +33,7 @@ public class RegisterServlet extends HttpServlet {
         String gmail=req.getParameter("email");
         if(dao.CheckUsername(username)){
             req.getRequestDispatcher("WEB-INF/alreadyExist.jsp").forward(req, resp);}
-        else { dao.adduser(new User(username, password, gmail));
+        else { dao.add(new User(username, password, gmail));
             req.getRequestDispatcher("index.jsp").forward(req, resp);
             MailSender.sendMail(gmail,"tkt","thank you for using our website");
         }

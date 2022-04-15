@@ -13,7 +13,8 @@ public class UserDAO {
     public UserDAO(Connection con) {
         this.con = con;
     }
-    public void adduser(User user){
+
+    public void add(User user){
         try {  PreparedStatement pr=con.prepareStatement("Insert into users values(?,?,?);");
             pr.setString(1, user.getUsername());
             pr.setString(2, user.getPass());
@@ -23,6 +24,31 @@ public class UserDAO {
             throwables.printStackTrace();
         }
     }
+
+    public void delete(User user){
+        try {
+            PreparedStatement st = con.prepareStatement("DELETE FROM users WHERE username=? AND password=?");
+            st.setString(1, user.getUsername());
+            st.setString(2, user.getPass());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    public boolean checkUser(User user) {
+        try {
+            PreparedStatement st = con.prepareStatement("SELECT * FROM users WHERE username = ? and pwd = ?;");
+            st.setString(1, user.getUsername());
+            st.setString(2, user.getPassword());
+            ResultSet res = st.executeQuery();
+            return res.next();
+        } catch (SQLException e) {}
+        return false;
+    }
+     */
+
+
     public boolean CheckUserbyall(User user){
         try {
             PreparedStatement pr=con.prepareStatement("select * from users where username = ? and " +
@@ -44,7 +70,8 @@ public class UserDAO {
             ResultSet rs=pr.executeQuery();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }return -1;
+        }
+        return -1;
     }
     public boolean CheckUsername(String username){
         try {
