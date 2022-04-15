@@ -13,6 +13,9 @@ public class UserDAO {
     public UserDAO(Connection con) {
         this.con = con;
     }
+    /*
+    test commit idk
+     */
 
     public void add(User user){
         try {  PreparedStatement pr=con.prepareStatement("Insert into users values(?,?,?);");
