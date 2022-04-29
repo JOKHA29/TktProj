@@ -1,6 +1,7 @@
 package Models;
 
-public class User {private String username;
+public class User {
+    private String username;
     private String pass;
     private String gmail;
 

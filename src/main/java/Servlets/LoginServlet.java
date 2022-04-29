@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.UserDAO;
+import Models.Admin;
 
 import java.io.IOException;
 
@@ -25,17 +26,19 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        dao = (UserDAO) getServletContext().getAttribute("UserDao");
+        dao = (UserDAO) getServletContext().getAttribute("UserDAO");
         String username = req.getParameter("username");
         String password = req.getParameter("pwd");
-        int userID = dao.CheckUser(username,password);
-        if(userID != -1){
+        boolean userID = dao.CheckUser(username,password);
+        if (username.equals(Admin.username) && password.equals(Admin.pass)){
+            req.getRequestDispatcher("WEB-INF/admin.jsp").forward(req, resp);
+        }
+        else if(userID){
             req.getSession().setAttribute("id",userID);
             req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
-
         }
 
         else if(dao.CheckUsername(username)) req.getRequestDispatcher("WEB-INF/wrongPassword.jsp").forward(req, resp);
-        else req.getRequestDispatcher("WEB-INF/wrongusername.jsp").forward(req, resp);
+        else req.getRequestDispatcher("WEB-INF/wrongUsername.jsp").forward(req, resp);
     }
 }

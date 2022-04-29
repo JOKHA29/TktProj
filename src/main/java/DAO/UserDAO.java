@@ -35,20 +35,6 @@ public class UserDAO {
         }
     }
 
-    /*
-    public boolean checkUser(User user) {
-        try {
-            PreparedStatement st = con.prepareStatement("SELECT * FROM users WHERE username = ? and pwd = ?;");
-            st.setString(1, user.getUsername());
-            st.setString(2, user.getPassword());
-            ResultSet res = st.executeQuery();
-            return res.next();
-        } catch (SQLException e) {}
-        return false;
-    }
-     */
-
-
     public boolean CheckUserbyall(User user){
         try {
             PreparedStatement pr=con.prepareStatement("select * from users where username = ? and " +
@@ -62,17 +48,20 @@ public class UserDAO {
         } return false;
 
     }
-    public int CheckUser(String username, String password){
+
+    public boolean CheckUser(String username, String password){
         try {
             PreparedStatement pr=con.prepareStatement("select * from users where username=? and pass=?;");
             pr.setString(1, username);
             pr.setString(2, password);
             ResultSet rs=pr.executeQuery();
+            if(!rs.next()) return false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return -1;
+        return true;
     }
+
     public boolean CheckUsername(String username){
         try {
             PreparedStatement pr = con.prepareStatement("select username from users where username = ?;");
@@ -84,5 +73,5 @@ public class UserDAO {
         }
         return false;
     }
-    }
+}
 

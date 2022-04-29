@@ -1,6 +1,6 @@
 package Models;
 
-public class Ticket{
+public class Ticket {
     private String movieName;
     private String seat; //"A1" "B2"
     private double price;
