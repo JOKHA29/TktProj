@@ -1,5 +1,5 @@
 package Servlets;
-
+import Models.Admin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,11 +29,13 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("pwd");
         boolean userID = dao.CheckUser(username,password);
-        if(userID != false){
+        if(username.equals(Admin.username)&&password.equals(Admin.pass)){
+            req.getRequestDispatcher("WEB-INF/admin.jsp").forward(req,resp);
+        }
+       else if(userID ){
             req.getSession().setAttribute("id",userID);
             req.getRequestDispatcher("WEB-INF/login.jsp").forward(req, resp);
         }
-
         else if(dao.CheckUsername(username)) req.getRequestDispatcher("WEB-INF/wrongPassword.jsp").forward(req, resp);
         else req.getRequestDispatcher("WEB-INF/wrongUsername.jsp").forward(req, resp);
     }
