@@ -23,8 +23,8 @@ public class ContextListener implements ServletContextListener {
             throwables.printStackTrace();
         }
         UserDAO dao = new UserDAO(con);
-        servletContextEvent.getServletContext().setAttribute("UserDao",dao);
-        System.out.println(servletContextEvent.getServletContext().getAttribute("UserDao"));
+        servletContextEvent.getServletContext().setAttribute("UserDAO",dao);
+        System.out.println(servletContextEvent.getServletContext().getAttribute("UserDAO"));
 
     }
 

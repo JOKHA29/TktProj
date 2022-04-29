@@ -62,16 +62,18 @@ public class UserDAO {
         } return false;
 
     }
-    public int CheckUser(String username, String password){
+    public boolean CheckUser(String username, String password){
         try {
             PreparedStatement pr=con.prepareStatement("select * from users where username=? and pass=?;");
             pr.setString(1, username);
             pr.setString(2, password);
             ResultSet rs=pr.executeQuery();
+            if(!rs.next()) return false;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return -1;
+        return true;
     }
     public boolean CheckUsername(String username){
         try {
